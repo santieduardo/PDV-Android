@@ -1,6 +1,7 @@
 package eduardosanti.com.br.pdv;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -59,13 +60,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void tryLogin(User user) {
         if (this.users.contains(user)) {
-            //this.goToWelcomeActivity(user);
+            this.goToSellsActivity(user);
         } else {
             this.displayToast("Usuário não encontrado");
         }
 
         this.dismissKeyboard();
     }
+
+    private void goToSellsActivity(User user) {
+        Intent intent = new Intent(this, SellsActivity.class);
+        intent.putExtra("LoggedUser", user);
+
+        startActivity(intent);
+    }
+
 
     private void clearFields() {
         this.emailEditText.setText("");
