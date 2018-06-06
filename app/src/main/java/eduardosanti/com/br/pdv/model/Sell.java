@@ -7,12 +7,10 @@ public class Sell implements Serializable {
 
     private User user;
     private List<Product> products;
-    private double amount;
 
-    public Sell(User user, List<Product> products, double amount) {
+    public Sell(User user, List<Product> products) {
         this.user = user;
         this.products = products;
-        this.amount = amount;
     }
 
     public User getUser() {
@@ -32,10 +30,13 @@ public class Sell implements Serializable {
     }
 
     public double getAmount() {
+        double amount = 0;
+
+        for(Product product: this.products) {
+            amount += product.getPrice() * product.getQuantity();
+        }
+
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
 }

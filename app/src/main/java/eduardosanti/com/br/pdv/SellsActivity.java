@@ -7,11 +7,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import eduardosanti.com.br.pdv.model.Product;
+import eduardosanti.com.br.pdv.model.Sell;
 import eduardosanti.com.br.pdv.model.User;
 
 public class SellsActivity extends AppCompatActivity {
 
     private User user;
+    private List<Sell> sells = new ArrayList<>();
 
     FloatingActionButton fab;
 
@@ -32,6 +38,13 @@ public class SellsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("LoggedUser");
         this.showSnackbar("Bem vindo, " + this.user.getEmail());
+
+        List<Product> products = new ArrayList<>();
+        products.add(new Product("Batata", 2, 1.5));
+        products.add(new Product("Cenoura", 2, 2.5));
+        products.add(new Product("Alface", 2, 3.5));
+
+        this.sells.add(new Sell(this.user, products));
     }
 
     public void fabOnClick(View view) {
