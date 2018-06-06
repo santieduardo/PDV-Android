@@ -2,6 +2,7 @@ package eduardosanti.com.br.pdv;
 
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,11 +31,15 @@ public class SellsActivity extends AppCompatActivity {
     private void setupView() {
         Intent intent = getIntent();
         this.user = (User) intent.getSerializableExtra("LoggedUser");
+        this.showSnackbar("Bem vindo, " + this.user.getEmail());
     }
 
     public void fabOnClick(View view) {
 
     }
 
+    private void showSnackbar(String message) {
+        Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
+    }
 
 }
