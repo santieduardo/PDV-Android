@@ -25,7 +25,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.bindView();
         this.setUpUsers();
+
+        this.emailEditText.setText("admin@gmail.com");
+        this.passwordEditText.setText("admin");
     }
 
     @Override
@@ -36,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         this.emailEditText.requestFocus();
     }
 
+    private void bindView() {
+        this.emailEditText = (EditText) findViewById(R.id.emailEditTextId);
+        this.passwordEditText = (EditText) findViewById(R.id.passwordEditTextId);
+    }
+
     private void setUpUsers() {
         if (this.users != null) {
             this.users.add(new User("admin@gmail.com", "admin"));
@@ -43,9 +52,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loginPressed(View view) {
-        this.emailEditText = (EditText) findViewById(R.id.emailEditTextId);
-        this.passwordEditText = (EditText) findViewById(R.id.passwordEditTextId);
-
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
