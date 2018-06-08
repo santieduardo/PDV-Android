@@ -1,14 +1,15 @@
 package eduardosanti.com.br.pdv.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sell implements Serializable {
 
     private User user;
-    private List<Product> products;
+    private ArrayList<Product> products;
 
-    public Sell(User user, List<Product> products) {
+    public Sell(User user, ArrayList<Product> products) {
         this.user = user;
         this.products = products;
     }
@@ -21,11 +22,11 @@ public class Sell implements Serializable {
         this.user = user;
     }
 
-    public List<Product> getProducts() {
+    public ArrayList<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 

@@ -5,19 +5,26 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import eduardosanti.com.br.pdv.adapter.SellAdapter;
 import eduardosanti.com.br.pdv.model.Product;
 import eduardosanti.com.br.pdv.model.Sell;
 import eduardosanti.com.br.pdv.model.User;
 
-public class SellsActivity extends AppCompatActivity {
+public class SellsActivity extends AppCompatActivity implements SellAdapter.SellOnClickListener {
 
     private User user;
-    private List<Sell> sells = new ArrayList<>();
+    private ArrayList<Sell> sells = new ArrayList<>();
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter sellAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     FloatingActionButton fab;
 
@@ -31,6 +38,7 @@ public class SellsActivity extends AppCompatActivity {
     }
 
     private void bindView() {
+        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.fab = (FloatingActionButton) findViewById(R.id.fab);
     }
 
@@ -39,12 +47,20 @@ public class SellsActivity extends AppCompatActivity {
         this.user = (User) intent.getSerializableExtra("LoggedUser");
         this.showSnackbar("Bem vindo, " + this.user.getEmail());
 
-        List<Product> products = new ArrayList<>();
+        ArrayList<Product> products = new ArrayList<>();
         products.add(new Product("Batata", 2, 1.5));
         products.add(new Product("Cenoura", 2, 2.5));
         products.add(new Product("Alface", 2, 3.5));
 
         this.sells.add(new Sell(this.user, products));
+
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        sellAdapter = new SellAdapter(this.sells, this);
+        recyclerView.setAdapter(sellAdapter);
     }
 
     public void fabOnClick(View view) {
@@ -53,6 +69,16 @@ public class SellsActivity extends AppCompatActivity {
 
     private void showSnackbar(String message) {
         Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT).show();
+    }
+
+    /*
+     *
+     * SellAdapter.SellOnClickListener
+     *
+     * */
+    @Override
+    public void onClick(View view, int position) {
+        
     }
 
 }
