@@ -6,13 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="PDV"
+        android:textAlignment="center"
+        android:textSize="30dp"/>
+
     <EditText
         android:id="@+id/emailEditTextId"
         android:layout_width="274dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:ems="10"
         android:hint="Digite seu email"
         android:inputType="textEmailAddress" />
@@ -23,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="136dp"
+        android:layout_marginTop="156dp"
         android:ems="10"
         android:hint="Digite sua senha"
         android:inputType="textPassword" />
@@ -34,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="194dp"
+        android:layout_marginTop="214dp"
         android:onClick="loginPressed"
         android:text="Entrar" />
 </RelativeLayout>
