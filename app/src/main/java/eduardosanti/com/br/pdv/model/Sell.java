@@ -14,6 +14,10 @@ public class Sell implements Serializable {
         this.products = products;
     }
 
+    public Sell() {
+
+    }
+
     public User getUser() {
         return user;
     }

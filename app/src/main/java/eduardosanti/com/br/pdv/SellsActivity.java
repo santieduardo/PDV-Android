@@ -83,6 +83,7 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
     public void fabOnClick(View view) {
         Intent intent = new Intent(this, CreateSellActivity.class);
         intent.putExtra(IntentIdentifier.REQUEST_CODE, RequestCodes.CREATE_SELL);
+        intent.putExtra(IntentIdentifier.CURRENT_USER, this.user);
         startActivityForResult(intent, RequestCodes.CREATE_SELL);
     }
 
