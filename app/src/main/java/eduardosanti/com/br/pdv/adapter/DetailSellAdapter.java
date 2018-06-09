@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import eduardosanti.com.br.pdv.R;
 import eduardosanti.com.br.pdv.model.Product;
+import eduardosanti.com.br.pdv.util.Util;
 
 public class DetailSellAdapter extends RecyclerView.Adapter<DetailSellAdapter.ViewHolder> {
 
@@ -47,9 +48,9 @@ public class DetailSellAdapter extends RecyclerView.Adapter<DetailSellAdapter.Vi
     @Override
     public void onBindViewHolder(final DetailSellAdapter.ViewHolder holder, final int position) {
         holder.textViewProduct.setText(arrayList.get(position).getName());
-        holder.textViewQuantity.setText(String.valueOf(arrayList.get(position).getQuantity()));
-        holder.textViewPrice.setText(String.valueOf(arrayList.get(position).getPrice()));
-        holder.textViewAmount.setText(String.valueOf(arrayList.get(position).getAmount()));
+        holder.textViewQuantity.setText(String.valueOf(arrayList.get(position).getQuantity()) + "UN");
+        holder.textViewPrice.setText(Util.currencyFormat(arrayList.get(position).getPrice()));
+        holder.textViewAmount.setText(Util.currencyFormat(arrayList.get(position).getAmount()));
     }
 
     @Override
