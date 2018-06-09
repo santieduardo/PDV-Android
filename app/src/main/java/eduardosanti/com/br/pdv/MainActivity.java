@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
         this.bindView();
         this.setUpUsers();
 
-        this.emailEditText.setText("admin@gmail.com");
-        this.passwordEditText.setText("admin");
+//        this.emailEditText.setText("admin@gmail.com");
+//        this.passwordEditText.setText("admin");
     }
 
     @Override
