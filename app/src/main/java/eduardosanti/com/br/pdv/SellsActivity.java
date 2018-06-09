@@ -43,11 +43,9 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == RequestCodes.CREATE_SELL) {
             if (resultCode == RESULT_OK) {
-                // TODO: Add to the arrayList the created sell
+                Sell newSell = (Sell) data.getSerializableExtra(IntentIdentifier.NEW_SELL);
 
-                //Contact newContact = (Contact) data.getSerializableExtra("newContact");
-
-                //this.arrayList.add(newContact);
+                this.sells.add(newSell);
             }
         }
 

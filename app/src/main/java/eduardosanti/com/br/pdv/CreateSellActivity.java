@@ -101,7 +101,11 @@ public class CreateSellActivity extends AppCompatActivity implements TextWatcher
     }
 
     public void onCheckout(View view) {
+        Intent intent = new Intent();
+        intent.putExtra(IntentIdentifier.NEW_SELL, this.sell);
+        setResult(RESULT_OK, intent);
 
+        finish();
     }
 
     private void clearFields() {
