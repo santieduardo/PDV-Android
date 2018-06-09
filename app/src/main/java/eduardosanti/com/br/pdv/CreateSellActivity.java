@@ -1,16 +1,21 @@
 package eduardosanti.com.br.pdv;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import eduardosanti.com.br.pdv.adapter.DetailSellAdapter;
 import eduardosanti.com.br.pdv.intentidentifier.IntentIdentifier;
 import eduardosanti.com.br.pdv.model.Product;
 import eduardosanti.com.br.pdv.model.Sell;
@@ -26,6 +31,10 @@ public class CreateSellActivity extends AppCompatActivity implements TextWatcher
     private Button buttonAddProduct;
     private Button buttonCheckout;
 
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter detailSellAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     private Sell sell = new Sell();
     private User user;
     private ArrayList<Product> arrayList = new ArrayList<>();
@@ -40,6 +49,7 @@ public class CreateSellActivity extends AppCompatActivity implements TextWatcher
     }
 
     private void bindView() {
+        this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.editTextProduct = (EditText) findViewById(R.id.editTextProduct);
         this.editTextQuantity = (EditText) findViewById(R.id.editTextQuantity);
         this.editTextPrice = (EditText) findViewById(R.id.editTextPrice);
@@ -55,6 +65,14 @@ public class CreateSellActivity extends AppCompatActivity implements TextWatcher
         this.editTextPrice.addTextChangedListener(this);
 
         this.getExtra(IntentIdentifier.CURRENT_USER);
+
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        detailSellAdapter = new DetailSellAdapter(this.arrayList);
+        recyclerView.setAdapter(detailSellAdapter);
     }
 
     private void getExtra(String identifier) {
@@ -72,6 +90,12 @@ public class CreateSellActivity extends AppCompatActivity implements TextWatcher
 
         this.sell.setProducts(this.arrayList);
 
+        this.clearFields();
+
+        this.dismissKeyboard();
+
+        this.detailSellAdapter.notifyDataSetChanged();
+
         this.buttonCheckout.setEnabled(true);
         this.buttonCheckout.setText("Checkout (" + Util.currencyFormat(this.sell.getAmount()) + ")");
     }
@@ -80,6 +104,22 @@ public class CreateSellActivity extends AppCompatActivity implements TextWatcher
 
     }
 
+    private void clearFields() {
+        this.editTextProduct.setText("");
+        this.editTextQuantity.setText("");
+        this.editTextPrice.setText("");
+
+        this.editTextProduct.requestFocus();
+    }
+
+    private void dismissKeyboard() {
+        View view = this.getCurrentFocus();
+
+        if (view != null) {
+            InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
 
     /*
      *
