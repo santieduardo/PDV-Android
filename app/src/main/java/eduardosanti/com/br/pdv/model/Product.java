@@ -38,5 +38,9 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    public double getAmount() {
+        return price * quantity;
+    }
+
 
 }
