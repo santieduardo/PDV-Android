@@ -88,4 +88,23 @@ public class UserDAODB implements UserDAO {
 
         return null;
     }
+
+    @Override
+    public User findByEmail(String value) {
+        SQLiteDatabase dataBase = dataBaseOpenHelper.getReadableDatabase();
+
+        Cursor cursor = dataBase.query("user",  new String[]{"id", "email", "password"},
+                "email = ?",new String[]{value},
+                null,null,null);
+
+        if(cursor.moveToNext()){
+            int userId = cursor.getInt(cursor.getColumnIndex("id"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+            String password = cursor.getString(cursor.getColumnIndex("password"));
+            User user = new User(userId, email, password);
+            return user;
+        }
+
+        return null;
+    }
 }

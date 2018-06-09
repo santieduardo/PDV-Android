@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import eduardosanti.com.br.pdv.dao.UserDAO;
+import eduardosanti.com.br.pdv.dao.db.UserDAODB;
 import eduardosanti.com.br.pdv.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,16 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<User> users = new ArrayList<>();
 
+    private UserDAO userDAO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         this.bindView();
-        this.setUpUsers();
-
-//        this.emailEditText.setText("admin@gmail.com");
-//        this.passwordEditText.setText("admin");
+        this.setupView();
     }
 
     @Override
@@ -45,10 +46,8 @@ public class MainActivity extends AppCompatActivity {
         this.passwordEditText = (EditText) findViewById(R.id.passwordEditTextId);
     }
 
-    private void setUpUsers() {
-        if (this.users != null) {
-            this.users.add(new User("admin@gmail.com", "admin"));
-        }
+    private void setupView() {
+        this.userDAO = new UserDAODB(this);
     }
 
     public void loginPressed(View view) {
@@ -65,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void tryLogin(User user) {
-        if (this.users.contains(user)) {
+        if (this.userDAO.findByEmail(user.getEmail()) != null) {
+            user = this.userDAO.findByEmail(user.getEmail());
+
             this.goToSellsActivity(user);
         } else {
             this.displayToast("Usuário não encontrado");

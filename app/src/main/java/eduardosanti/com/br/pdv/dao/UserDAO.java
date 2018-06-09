@@ -10,5 +10,6 @@ public interface UserDAO {
     public void update(User user);
     public ArrayList<User> findAll();
     public User findById(int id);
+    public User findByEmail(String email);
 
 }
