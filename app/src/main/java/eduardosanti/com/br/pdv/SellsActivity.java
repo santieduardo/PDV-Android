@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import eduardosanti.com.br.pdv.adapter.SellAdapter;
+import eduardosanti.com.br.pdv.intentidentifier.IntentIdentifier;
 import eduardosanti.com.br.pdv.model.Product;
 import eduardosanti.com.br.pdv.model.Sell;
 import eduardosanti.com.br.pdv.model.User;
@@ -78,7 +79,10 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
      * */
     @Override
     public void onClick(View view, int position) {
-        
+        Intent intent = new Intent(this, DetailSellActivity.class);
+        intent.putExtra(IntentIdentifier.SELECTED_SELL, this.sells.get(position));
+
+        startActivity(intent);
     }
 
 }
