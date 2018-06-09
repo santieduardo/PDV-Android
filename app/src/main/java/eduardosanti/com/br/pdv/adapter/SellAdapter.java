@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import eduardosanti.com.br.pdv.R;
 import eduardosanti.com.br.pdv.model.Sell;
+import eduardosanti.com.br.pdv.util.Util;
 
 public class SellAdapter extends RecyclerView.Adapter<SellAdapter.ViewHolder> {
 
@@ -23,12 +24,14 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewBuyer;
         public TextView textViewQuantity;
+        public TextView textViewAmount;
 
         public ViewHolder(View view) {
             super(view);
 
             textViewBuyer = (TextView) view.findViewById(R.id.textViewBuyer);
             textViewQuantity = (TextView) view.findViewById(R.id.textViewQuantity);
+            textViewAmount = (TextView) view.findViewById(R.id.textViewAmount);
         }
 
     }
@@ -50,7 +53,8 @@ public class SellAdapter extends RecyclerView.Adapter<SellAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.textViewBuyer.setText(arrayList.get(position).getUser().getEmail());
-        holder.textViewQuantity.setText(String.valueOf(arrayList.get(position).getProducts().size()));
+        holder.textViewQuantity.setText(String.valueOf(arrayList.get(position).getProducts().size()) + "UN");
+        holder.textViewAmount.setText(Util.currencyFormat(arrayList.get(position).getAmount()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
 

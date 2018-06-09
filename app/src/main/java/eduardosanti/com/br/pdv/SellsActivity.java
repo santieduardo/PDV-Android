@@ -67,13 +67,6 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
         this.user = (User) intent.getSerializableExtra("LoggedUser");
         this.showSnackbar("Bem vindo, " + this.user.getEmail());
 
-//        ArrayList<Product> products = new ArrayList<>();
-//        products.add(new Product("Batata", 2, 1.5));
-//        products.add(new Product("Cenoura", 2, 2.5));
-//        products.add(new Product("Alface", 2, 3.5));
-//
-//        this.sells.add(new Sell(this.user, products));
-
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
