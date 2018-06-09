@@ -7,10 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import eduardosanti.com.br.pdv.adapter.SellAdapter;
 import eduardosanti.com.br.pdv.intentidentifier.IntentIdentifier;
@@ -27,6 +29,7 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
     private RecyclerView recyclerView;
     private RecyclerView.Adapter sellAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Toolbar toolbar;
 
     FloatingActionButton fab;
 
@@ -55,6 +58,8 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
     private void bindView() {
         this.recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         this.fab = (FloatingActionButton) findViewById(R.id.fab);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     private void setupView() {
@@ -101,5 +106,33 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
 
         startActivity(intent);
     }
+
+
+    /*
+    *
+    * Toolbar
+    *
+    * */
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                finish();
+                break;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.layout.toolbar_menu_layout, menu);
+        return true;
+    }
+
 
 }
