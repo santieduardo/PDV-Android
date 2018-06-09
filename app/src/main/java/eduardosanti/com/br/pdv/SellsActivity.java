@@ -17,6 +17,7 @@ import eduardosanti.com.br.pdv.intentidentifier.IntentIdentifier;
 import eduardosanti.com.br.pdv.model.Product;
 import eduardosanti.com.br.pdv.model.Sell;
 import eduardosanti.com.br.pdv.model.User;
+import eduardosanti.com.br.pdv.requestcodes.RequestCodes;
 
 public class SellsActivity extends AppCompatActivity implements SellAdapter.SellOnClickListener {
 
@@ -36,6 +37,21 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
 
         this.bindView();
         this.setupView();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == RequestCodes.CREATE_SELL) {
+            if (resultCode == RESULT_OK) {
+                // TODO: Add to the arrayList the created sell
+
+                //Contact newContact = (Contact) data.getSerializableExtra("newContact");
+
+                //this.arrayList.add(newContact);
+            }
+        }
+
+        this.sellAdapter.notifyDataSetChanged();
     }
 
     private void bindView() {
@@ -65,7 +81,9 @@ public class SellsActivity extends AppCompatActivity implements SellAdapter.Sell
     }
 
     public void fabOnClick(View view) {
-
+        Intent intent = new Intent(this, CreateSellActivity.class);
+        intent.putExtra(IntentIdentifier.REQUEST_CODE, RequestCodes.CREATE_SELL);
+        startActivityForResult(intent, RequestCodes.CREATE_SELL);
     }
 
     private void showSnackbar(String message) {
